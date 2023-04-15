@@ -133,4 +133,28 @@ def my_blogs(request):
 
 def singleblog(request, pk):
     s_blog = Blog.objects.get(id = pk)
-    return render(request, 'single_blog.html', {"blog":s_blog, 'userdata':user_obj})
+    filtered_comments = Comment.objects.filter(blog= s_blog)
+    try:
+        return render(request, 'single_blog.html', {"blog":s_blog, 'userdata':user_obj, 'all_comments':filtered_comments})
+    except:
+        return render(request, 'single_blog.html', {"blog":s_blog, 'all_comments': filtered_comments})
+
+def add_comment(request, bid):
+    try:
+        user_obj = User.objects.get(email = request.session['user_email'])
+        blog_obj = Blog.objects.get(id = bid)
+        Comment.objects.create(
+            message = request.POST['troll'],
+            blog = blog_obj,
+            user = user_obj
+        )
+        filtered_comments = Comment.objects.filter(blog = blog_obj)
+        return render(request, 'single_blog.html', {"blog":blog_obj, 'userdata':user_obj, 'all_comments': filtered_comments})
+    except:
+        return redirect('login')
+
+
+def search_blog(request):
+    shabd = request.POST['search']
+    filtered_blogs = Blog.objects.filter(title__icontains = shabd )
+    return render(request, 'searched_blog.html', {'blogs': filtered_blogs})

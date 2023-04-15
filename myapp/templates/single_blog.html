@@ -35,8 +35,9 @@
                             <div class="w3l-subscribe-content text-center bg-clr-white py-md-5 py-2">
                                 <div class="py-5">
                                     <h3 class="section-title-left mb-2">Comment Section</h3>
-                                    <form action="#" method="GET" class="subscribe">
-                                        <textarea class="col-lg-8"  placeholder="Enter Your Comments Here.." ></textarea>
+                                    <form action="/add_comment/{{blog.id}}" method="POST" class="subscribe">
+                                        {% csrf_token %}
+                                        <textarea class="col-lg-8" name="troll"  placeholder="Enter Your Comments Here.." ></textarea>
                                         <br>
                                         <button class="btn btn-style btn-primary">Comment</button>
                                     </form>
@@ -44,6 +45,8 @@
                             </div>
                         </div>
                         </div>
+
+                        
 
 
                     </div>
@@ -53,6 +56,33 @@
         </div>
     </div>
     <!-- /main-slider -->
+    <!-- comment section started -->
+    <div class="row container " >
+        <div class="col-lg-1" ></div> 
+        <div class="col-lg-10 col-md-10 item">
+            {% for i in all_comments %}
+            <div class="card">
+                
+                <div class="card-body blog-details">
+                    <a href="#blog-single.html" class="blog-desc">{{i.message}}
+                    </a>
+                    <div class="author align-items-center">
+                        <ul class="blog-meta">
+                            <li>
+                                <a href="author.html">{{i.user.first_name}}</a> </a>
+                            </li>
+                            <li class="meta-item blog-lesson">
+                                <span class="meta-value">{{i.time}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-1" ></div> 
+    </div>
 </section>
+<br>
 
 {% endblock %}

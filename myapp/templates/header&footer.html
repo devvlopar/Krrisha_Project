@@ -39,8 +39,9 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<nav class="mx-auto">
 					<div class="search-bar">
-						<form class="search">
-							<input type="search" class="search__input" name="search" placeholder="Discover news, articles and more"
+						<form class="search" action="/search_blog/" method="POST">
+              {% csrf_token %}
+							<input type="search" class="search__input" name="search" placeholder="Discover Blogs"
 								onload="equalWidth()" required>
 							<span class="fa fa-search search__icon"></span>
 						</form>
