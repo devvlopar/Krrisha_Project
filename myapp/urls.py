@@ -17,7 +17,8 @@ urlpatterns = [
    path('add_comment/<int:bid>', add_comment, name='add_comment'),
    path('search_blog/', search_blog, name='search_blog'),
    path('donate/<int:bid>', donate, name='donate'),
-
+   path('donate/paymenthandler/', paymenthandler, name='paymenthandler' )
+   
    # path('test/', test)
 
 

@@ -40,3 +40,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.message
+    
+
+class Donation(models.Model):
+    pay_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    pay_to = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    time = models.DateTimeField(auto_now=True)
+    

@@ -9,9 +9,9 @@
         <h3>by {{blog.user.username}}</h3>
         <div class="py-5">
             <h3 class="section-title-left mb-2">Please Enter Amount</h3>
-            <form action="/add_comment/{{blog.id}}" method="POST" class="subscribe">
+            <form action="/donate/{{blog.id}}" method="POST" class="subscribe">
                 {% csrf_token %}
-                <input class="col-lg-8" name="payment_amount"> 
+                <input class="col-lg-8" name="pamount"> 
                 <br>
                 <button class="btn btn-style btn-primary">pay now</button>
             </form>
