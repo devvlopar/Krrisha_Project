@@ -133,3 +133,10 @@ EMAIL_HOST_PASSWORD = 'npqwudutnastzybq'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 MEDIA_URL = '/images/'
+
+with open(os.path.join(BASE_DIR, 'rzp.csv'), 'r') as f1:
+        list_of_lines = f1.readlines()
+        final_list = (list_of_lines[-1]).split(",")
+        
+RAZOR_KEY_ID = final_list[0]
+RAZOR_KEY_SECRET = final_list[-1][:-1]

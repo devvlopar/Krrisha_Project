@@ -4,6 +4,10 @@ from django.core.mail import send_mail
 import random 
 from django.conf import settings
 from .models import *
+
+import os
+
+
 # Create your views here.
 
 def beauty_fun(request):
@@ -158,3 +162,24 @@ def search_blog(request):
     shabd = request.POST['search']
     filtered_blogs = Blog.objects.filter(title__icontains = shabd )
     return render(request, 'searched_blog.html', {'blogs': filtered_blogs})
+
+
+def donate(request, bid):
+    try:
+        user_obj = User.objects.get(email = request.session['user_email'])
+        blog_obj = Blog.objects.get(id = bid)
+
+        return render(request, 'payment.html', {'blog':blog_obj, 'userdata': user_obj})
+    except:
+        return redirect('login')
+    
+
+"""def test(request):
+    with open(os.path.join(settings.BASE_DIR, 'rzp.csv'), 'r') as f1:
+        list_of_lines = f1.readlines()
+        str1 = list_of_lines[-1]
+        final_list = str1.split(",")
+        razor_id = final_list[0]
+        razor_secret =  final_list[-1][:-1]
+        print(razor_secret)
+    return HttpResponse('ok')"""

@@ -16,6 +16,10 @@ urlpatterns = [
    path('singleblog/<int:pk>', singleblog, name='singleblog'),
    path('add_comment/<int:bid>', add_comment, name='add_comment'),
    path('search_blog/', search_blog, name='search_blog'),
+   path('donate/<int:bid>', donate, name='donate'),
+
+   # path('test/', test)
+
 
 
 
