@@ -275,3 +275,19 @@ def paymenthandler(request):
     else:
        # if other than POST request is made.
         return HttpResponseBadRequest()
+
+
+def my_profile(request):
+    if request.method == 'GET':
+        try:
+            user_obj = User.objects.get(email =  request.session['user_email'])
+            return render(request, 'my_profile.html', { 'userdata':user_obj})
+        except:
+            return redirect('login')
+    else:
+        user_obj = User.objects.get(email =  request.session['user_email'])
+        user_obj.first_name = request.POST['fname']
+        user_obj.last_name = request.POST['lname']
+        user_obj.username = request.POST['username']
+        user_obj.save()
+        return render(request, 'my_profile.html', {'userdata':user_obj, 'msg': 'Updated!!'})
